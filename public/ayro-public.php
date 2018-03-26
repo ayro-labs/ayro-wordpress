@@ -37,7 +37,7 @@ class AyroPublic {
    */
   public function enqueueScripts() {
     // Ayro widget script
-    wp_register_script('ayro-script', plugins_url('js/ayro-0.0.5.min.js', __FILE__, array(), false, true));
+    wp_register_script('ayro-script', plugins_url('js/ayro-wordpress.min.js', __FILE__, array(), false, true));
     wp_enqueue_script('ayro-script');
 
     // Ayro init script

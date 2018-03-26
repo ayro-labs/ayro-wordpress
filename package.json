@@ -1,0 +1,23 @@
+{
+  "name": "ayro-wordpress",
+  "description": "Ayro WordPress Plugin",
+  "version": "0.0.1",
+  "author": {
+    "name": "Ayro team",
+    "email": "team@ayro.io",
+    "url": "https://ayro.io"
+  },
+  "homepage": "https://ayro.io",
+  "scripts": {
+    "build": "node tasks/build.js",
+    "update-lib": "node tasks/update-lib.js",
+    "release-plugin": "node tasks/release.js",
+    "publish-plugin": "node tasks/publish.js"
+  },
+  "devDependencies": {
+    "@ayro/commons": "0.0.7",
+    "axios": "0.18.0",
+    "bluebird": "3.5.1",
+    "lodash": "4.17.5"
+  }
+}
