@@ -5,9 +5,9 @@ const Promise = require('bluebird');
 
 const WORKING_DIR = path.resolve(__dirname, '../');
 
-function buildProject() {
+function buildPlugin() {
   return Promise.coroutine(function* () {
-    commands.log('Building project...');
+    commands.log('Building plugin...');
     yield build.run();
   })();
 }
@@ -15,6 +15,6 @@ function buildProject() {
 // Run this if call directly from command line
 if (require.main === module) {
   releaseTask.withWorkingDir(WORKING_DIR);
-  releaseTask.withBuildTask(buildProject);
+  releaseTask.withBuildTask(buildPlugin);
   releaseTask.run(process.argv[2], process.argv[3]);
 }
