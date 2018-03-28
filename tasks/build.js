@@ -7,7 +7,7 @@ const WORKING_DIR = path.resolve(__dirname, '../');
 const DIST_DIR = 'dist';
 const AYRO_DIR = 'ayro';
 const DIST_AYRO_DIR = `${DIST_DIR}/${AYRO_DIR}`;
-const ZIP_NAME = 'ayro.zip';
+const ZIP_NAME = 'ayro-wordpress.zip';
 const ZIP_FILES = ['admin', 'includes', 'languages', 'public', 'ayro.php', 'index.php', 'uninstall.php', 'readme.md', 'license.txt'];
 
 exports.run = () => {

@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@ayro/commons": "0.0.7",
+    "@octokit/rest": "15.2.5",
     "axios": "0.18.0",
     "bluebird": "3.5.1",
     "lodash": "4.17.5"

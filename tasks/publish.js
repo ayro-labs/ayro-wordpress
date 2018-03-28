@@ -1,6 +1,7 @@
 const build = require('./build');
 const {publishTask, commands} = require('@ayro/commons');
 const path = require('path');
+const GitHubApi = require('@octokit/rest');
 const Promise = require('bluebird');
 
 const REPOSITORY_NAME = 'ayro-wordpress';
@@ -26,7 +27,7 @@ function prepareRepository() {
   return Promise.coroutine(function* () {
     commands.log('Preparing Github repository...');
     yield commands.exec(`rm -rf ${TEMP_REPOSITORY_DIR}`);
-    yield commands.exec(`git clone https://github.com/${REPOSITORY_OWNER}/${REPOSITORY_NAME}.git ${REPOSITORY_NAME}`, TEMP_DIR);
+    yield commands.exec(`git clone git@github.com:${REPOSITORY_OWNER}/${REPOSITORY_NAME}.git ${REPOSITORY_NAME}`, TEMP_DIR);
     yield commands.exec('rm -rf *', TEMP_REPOSITORY_DIR);
   })();
 }
@@ -82,6 +83,6 @@ if (require.main === module) {
   publishTask.withWorkingDir(WORKING_DIR);
   publishTask.withBuildTask(buildPlugin);
   publishTask.withBeforePublishTask(beforePublish);
-  publishTask.withPublishTask(publishToWordPressSVN);
+  publishTask.withPublishTask(publishToWordPressSvn);
   publishTask.run();
 }
