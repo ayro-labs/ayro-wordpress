@@ -10,7 +10,7 @@ const DIST_AYRO_DIR = `${DIST_DIR}/${AYRO_DIR}`;
 const ZIP_NAME = 'ayro-wordpress.zip';
 const ZIP_FILES = ['admin', 'includes', 'languages', 'public', 'ayro.php', 'index.php', 'uninstall.php', 'readme.md', 'license.txt'];
 
-exports.run = () => {
+function build() => {
   return Promise.coroutine(function* () {
     try {
       yield commands.exec(`mkdir -p ${DIST_DIR}`, WORKING_DIR);
@@ -28,5 +28,5 @@ exports.run = () => {
 
 // Run this if call directly from command line
 if (require.main === module) {
-  this.run();
+  build();
 }

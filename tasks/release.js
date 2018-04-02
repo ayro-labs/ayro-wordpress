@@ -1,4 +1,3 @@
-const build = require('./build');
 const {releaseTask, commands} = require('@ayro/commons');
 const path = require('path');
 const Promise = require('bluebird');
@@ -8,7 +7,7 @@ const WORKING_DIR = path.resolve(__dirname, '../');
 function buildPlugin() {
   return Promise.coroutine(function* () {
     commands.log('Building plugin...');
-    yield build.run();
+    yield commands.exec('npm run build', WORKING_DIR);
   })();
 }
 

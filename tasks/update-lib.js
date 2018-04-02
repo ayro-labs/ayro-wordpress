@@ -29,5 +29,9 @@ function updateLib(version) {
 
 // Run this if call directly from command line
 if (require.main === module) {
+  if (!process.argv[2]) {
+    commands.logError('Ayro library version must be defined.');
+    process.exit(1);
+  }
   updateLib(process.argv[2]);
 }

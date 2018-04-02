@@ -1,4 +1,3 @@
-const build = require('./build');
 const {publishTask, commands} = require('@ayro/commons');
 const path = require('path');
 const GitHubApi = require('@octokit/rest');
@@ -19,7 +18,7 @@ gitHubApi.authenticate({
 function buildPlugin() {
   return Promise.coroutine(function* () {
     commands.log('Building plugin...');
-    yield build.run();
+    yield commands.exec('npm run build', WORKING_DIR);
   })();
 }
 
