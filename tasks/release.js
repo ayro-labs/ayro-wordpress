@@ -8,7 +8,7 @@ const WORKING_DIR = path.resolve(__dirname, '../');
 const MAIN_PHP_FILE = path.join(WORKING_DIR, 'ayro.php');
 const PLUGIN_VERSION_REGEX = /Version:           (\d+\.\d+\.\d+)/;
 const PLUGIN_VERSION_FORMAT = 'Version:           %s';
-const PLUGIN_VERSION_DEFINE_REGEX = /define('AYRO_PLUGIN_VERSION', '(\d+\.\d+\.\d+)');/;
+const PLUGIN_VERSION_DEFINE_REGEX = /define\('AYRO_PLUGIN_VERSION', '(\d+\.\d+\.\d+)'\);/;
 const PLUGIN_VERSION_DEFINE_FORMAT = 'define(\'AYRO_PLUGIN_VERSION\', \'%s\');';
 
 const readFileAsync = Promise.promisify(fs.readFile);
@@ -24,6 +24,7 @@ function buildPlugin() {
 function getPluginVersion() {
   return Promise.coroutine(function* () {
     const mainFile = yield readFileAsync(MAIN_PHP_FILE, 'utf8');
+    console.log(mainFile)
     const match = PLUGIN_VERSION_REGEX.exec(mainFile);
     if (!match) {
       throw new Error('Could not find the project version name in main file');
