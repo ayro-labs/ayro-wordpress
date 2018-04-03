@@ -71,10 +71,10 @@ function createGithubRelease() {
 
 function beforePublish() {
   return Promise.coroutine(function* () {
-    // yield prepareGithubRepository();
-    // yield copyGithubFiles();
-    // yield pushGithubFiles();
-    // yield createGithubRelease();
+    yield prepareGithubRepository();
+    yield copyGithubFiles();
+    yield pushGithubFiles();
+    yield createGithubRelease();
   })();
 }
 
