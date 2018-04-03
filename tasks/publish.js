@@ -1,3 +1,4 @@
+const packageJson = require('../package');
 const {publishTask, commands} = require('@ayro/commons');
 const path = require('path');
 const GitHubApi = require('@octokit/rest');
@@ -31,25 +32,25 @@ function prepareRepository() {
   })();
 }
 
-function copyFiles(packageJson) {
+function copyFiles() {
   return Promise.coroutine(function* () {
     commands.log('Copying files...');
     yield commands.exec(`cp dist/${packageJson.name}.zip ${TEMP_REPOSITORY_DIR}/${packageJson.name}-${packageJson.version}.zip`);
   })();
 }
 
-function pushFiles(version) {
+function pushFiles() {
   return Promise.coroutine(function* () {
     commands.log('Committing, tagging and pushing files to Github repository...');
     yield commands.exec('git add .', TEMP_REPOSITORY_DIR);
-    yield commands.exec(`git commit -am 'Release ${version}'`, TEMP_REPOSITORY_DIR);
+    yield commands.exec(`git commit -am 'Release ${packageJson.version}'`, TEMP_REPOSITORY_DIR);
     yield commands.exec('git push origin master', TEMP_REPOSITORY_DIR);
-    yield commands.exec(`git tag ${version}`, TEMP_REPOSITORY_DIR);
+    yield commands.exec(`git tag ${packageJson.version}`, TEMP_REPOSITORY_DIR);
     yield commands.exec('git push --tags', TEMP_REPOSITORY_DIR);
   })();
 }
 
-function createRelease(version) {
+function createRelease() {
   return Promise.coroutine(function* () {
     commands.log('Creating Github release...');
     const createRelease = Promise.promisify(gitHubApi.repos.createRelease);
@@ -57,17 +58,17 @@ function createRelease(version) {
       owner: REPOSITORY_OWNER,
       repo: REPOSITORY_NAME,
       tag_name: version,
-      name: `Release ${version}`,
+      name: `Release ${packageJson.version}`,
     });
   })();
 }
 
-function beforePublish(packageJson) {
+function beforePublish() {
   return Promise.coroutine(function* () {
     yield prepareRepository();
-    yield copyFiles(packageJson);
-    yield pushFiles(packageJson.version);
-    yield createRelease(packageJson.version);
+    yield copyFiles();
+    yield pushFiles();
+    yield createRelease();
   })();
 }
 
