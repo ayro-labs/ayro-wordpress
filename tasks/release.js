@@ -16,7 +16,7 @@ const writeFileAsync = Promise.promisify(fs.writeFile);
 
 function buildPlugin() {
   return Promise.coroutine(function* () {
-    commands.log('Building library...');
+    commands.log('Building plugin...');
     yield commands.exec('npm run build', WORKING_DIR);
   })();
 }
@@ -24,7 +24,6 @@ function buildPlugin() {
 function getPluginVersion() {
   return Promise.coroutine(function* () {
     const mainFile = yield readFileAsync(MAIN_PHP_FILE, 'utf8');
-    console.log(mainFile)
     const match = PLUGIN_VERSION_REGEX.exec(mainFile);
     if (!match) {
       throw new Error('Could not find the project version name in main file');
