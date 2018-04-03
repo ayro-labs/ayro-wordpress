@@ -9,7 +9,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Ayro
- * Plugin URI:        https://ayro.io
+ * Plugin URI:        https://ayro.io/guides/wordpress
  * Description:       Ayro is multi channel customer support software. With Ayro you can chat with your customers wherever they are, directly from your Slack workspace. Integrate your Wordpress website with Ayro within a few minutes.
  * Version:           1.0.0
  * Author:            Ayro
