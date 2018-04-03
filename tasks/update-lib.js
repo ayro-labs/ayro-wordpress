@@ -17,7 +17,7 @@ function updateLib(version) {
   Promise.coroutine(function* () {
     try {
       commands.log(`Updating library ayro-wordpress to version ${version}`);
-      const libUrl = `/ayrolabs/ayro-javascript/${version}/ayro-wordpress-${version}.min.js`;
+      const libUrl = `/ayrolabs/ayro-javascript/${version}/ayro-wordpress.min.js`;
       const response = yield githubContentClient.get(libUrl);
       yield writeFileAsync(LIB_FILE, response.data);
       commands.log(`Library ayro-wordpress updated with success: ${LIB_FILE}`);
