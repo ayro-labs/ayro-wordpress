@@ -41,7 +41,7 @@ function prepareGithubRepository() {
 function copyGithubFiles() {
   return Promise.coroutine(function* () {
     commands.log('Copying files to Github repository...');
-    yield commands.exec(`cp dist/${packageJson.name}.zip ${TEMP_GITHUB_REPOSITORY_DIR}/${packageJson.name}.zip`);
+    yield commands.exec(`cp dist/ayro-wordpress.zip ${TEMP_GITHUB_REPOSITORY_DIR}`);
   })();
 }
 
