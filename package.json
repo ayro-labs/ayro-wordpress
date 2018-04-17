@@ -9,6 +9,7 @@
   },
   "homepage": "https://ayro.io",
   "scripts": {
+    "lint": "eslint '**/*.js'",
     "build": "node tasks/build.js",
     "update-lib": "node tasks/update-lib.js",
     "release-plugin": "node tasks/release.js",
@@ -16,9 +17,12 @@
   },
   "devDependencies": {
     "@ayro/commons": "0.0.21",
-    "@octokit/rest": "15.2.5",
+    "@octokit/rest": "15.2.6",
     "axios": "0.18.0",
     "bluebird": "3.5.1",
+    "eslint": "4.19.1",
+    "eslint-config-airbnb-base": "12.1.0",
+    "eslint-plugin-import": "2.11.0",
     "lodash": "4.17.5"
   }
 }

@@ -13,18 +13,16 @@ const githubContentClient = axios.create({
   baseURL: 'https://raw.githubusercontent.com',
 });
 
-function updateLib(version) {
-  Promise.coroutine(function* () {
-    try {
-      commands.log(`Updating library ayro-wordpress to version ${version}`);
-      const libUrl = `/ayrolabs/ayro-javascript/${version}/ayro-wordpress.min.js`;
-      const response = yield githubContentClient.get(libUrl);
-      yield writeFileAsync(LIB_FILE, response.data);
-      commands.log(`Library ayro-wordpress updated with success: ${LIB_FILE}`);
-    } catch (err) {
-      commands.logError(`Error updating ayro-wordpress library: ${err.message}`);
-    }
-  })();
+async function updateLib(version) {
+  try {
+    commands.log(`Updating library ayro-wordpress to version ${version}`);
+    const libUrl = `/ayrolabs/ayro-javascript/${version}/ayro-wordpress.min.js`;
+    const response = await githubContentClient.get(libUrl);
+    await writeFileAsync(LIB_FILE, response.data);
+    commands.log(`Library ayro-wordpress updated with success: ${LIB_FILE}`);
+  } catch (err) {
+    commands.logError(`Error updating ayro-wordpress library: ${err.message}`);
+  }
 }
 
 // Run this if call directly from command line
