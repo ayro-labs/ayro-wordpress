@@ -1,3 +1,5 @@
+'use strict';
+
 const {commands} = require('@ayro/commons');
 const fs = require('fs');
 const path = require('path');

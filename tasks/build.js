@@ -1,3 +1,5 @@
+'use strict';
+
 const {commands} = require('@ayro/commons');
 const path = require('path');
 const _ = require('lodash');
