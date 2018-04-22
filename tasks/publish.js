@@ -85,7 +85,7 @@ async function copySvnTrunkFiles() {
 
 async function pushSvnTrunkFiles() {
   commands.log('Committing and pushing files to Subversion trunk repository...');
-  await commands.exec('svn add *', TEMP_WP_TRUNK_REPOSITORY_DIR);
+  await commands.exec('svn add * --force', TEMP_WP_TRUNK_REPOSITORY_DIR);
   await commands.exec(`svn commit --force-interactive --username ${WP_REPOSITORY_USERNAME} -m 'Release ${packageJson.version}'`, TEMP_WP_TRUNK_REPOSITORY_DIR);
 }
 
@@ -103,7 +103,7 @@ async function copySvnAssetsFiles() {
 
 async function pushSvnAssetsFiles() {
   commands.log('Committing and pushing files to Subversion assets repository...');
-  await commands.exec('svn add *', TEMP_WP_ASSETS_REPOSITORY_DIR);
+  await commands.exec('svn add * --force', TEMP_WP_ASSETS_REPOSITORY_DIR);
   await commands.exec(`svn commit --force-interactive --username ${WP_REPOSITORY_USERNAME} -m 'Release ${packageJson.version}'`, TEMP_WP_ASSETS_REPOSITORY_DIR);
 }
 
