@@ -45,7 +45,7 @@ async function copyGithubFiles() {
 
 async function pushGithubFiles() {
   commands.log('Committing, tagging and pushing files to Github repository...');
-  await commands.exec('git add .', TEMP_GITHUB_REPOSITORY_DIR);
+  await commands.exec('git add --all', TEMP_GITHUB_REPOSITORY_DIR);
   await commands.exec(`git commit -am 'Release ${packageJson.version}'`, TEMP_GITHUB_REPOSITORY_DIR);
   await commands.exec('git push origin master', TEMP_GITHUB_REPOSITORY_DIR);
   await commands.exec(`git tag ${packageJson.version}`, TEMP_GITHUB_REPOSITORY_DIR);
@@ -76,14 +76,14 @@ async function prepareSvnTrunkRepository() {
   await commands.exec(`rm -rf ${WP_TRUNK_REPOSITORY_NAME}/*`, TEMP_DIR);
 }
 
-async function copySvnTrunkFiles() {
+async function copyFilesToSvnTrunk() {
   commands.log('Copying files to Subversion trunk repository...');
   await commands.exec(`unzip dist/ayro-wordpress.zip -d ${TEMP_DIR}`);
   await commands.exec(`mv ayro/* ${WP_TRUNK_REPOSITORY_NAME}`, TEMP_DIR);
   await commands.exec('rm -Rf ayro', TEMP_DIR);
 }
 
-async function pushSvnTrunkFiles() {
+async function pushFilesToSvnTrunk() {
   commands.log('Committing and pushing files to Subversion trunk repository...');
   await commands.exec('svn add * --force', TEMP_WP_TRUNK_REPOSITORY_DIR);
   await commands.exec(`svn commit --force-interactive --username ${WP_REPOSITORY_USERNAME} -m 'Release ${packageJson.version}'`, TEMP_WP_TRUNK_REPOSITORY_DIR);
@@ -96,12 +96,12 @@ async function prepareSvnAssetsRepository() {
   await commands.exec(`rm -rf ${WP_ASSETS_REPOSITORY_NAME}/*`, TEMP_DIR);
 }
 
-async function copySvnAssetsFiles() {
+async function copyFilesToSvnAssets() {
   commands.log('Copying files to Subversion assets repository...');
   await commands.exec(`cp assets/* ${TEMP_WP_ASSETS_REPOSITORY_DIR}`);
 }
 
-async function pushSvnAssetsFiles() {
+async function pushFilesToSvnAssets() {
   commands.log('Committing and pushing files to Subversion assets repository...');
   await commands.exec('svn add * --force', TEMP_WP_ASSETS_REPOSITORY_DIR);
   await commands.exec(`svn commit --force-interactive --username ${WP_REPOSITORY_USERNAME} -m 'Release ${packageJson.version}'`, TEMP_WP_ASSETS_REPOSITORY_DIR);
@@ -109,11 +109,11 @@ async function pushSvnAssetsFiles() {
 
 async function publishToWordPressSvn() {
   await prepareSvnTrunkRepository();
-  await copySvnTrunkFiles();
-  await pushSvnTrunkFiles();
+  await copyFilesToSvnTrunk();
+  await pushFilesToSvnTrunk();
   await prepareSvnAssetsRepository();
-  await copySvnAssetsFiles();
-  await pushSvnAssetsFiles();
+  await copyFilesToSvnAssets();
+  await pushFilesToSvnAssets();
 }
 
 // Run this if call directly from command line
