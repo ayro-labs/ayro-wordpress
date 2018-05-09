@@ -45,6 +45,7 @@ class AyroPublic {
     $settings = get_option('ayro_settings');
     $config = array(
       'appToken' => $settings['app_token'],
+      'sounds' => $settings['sounds'],
       'chatboxHeaderTitle' => $settings['chatbox_header_title'],
       'chatboxInputPlaceholder' => $settings['chatbox_input_placeholder'],
     );
