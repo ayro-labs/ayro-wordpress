@@ -32,6 +32,16 @@ class AyroAdmin {
     $this->pluginName = $pluginName;
     $this->pluginVersion = $pluginVersion;
     $this->settings = get_option('ayro_settings');
+    if (!isset($this->settings['sounds'])) {
+      $this->settings['sounds'] = '1';
+    }
+    if (!isset($this->settings['chatbox_header_title'])) {
+      $this->settings['chatbox_header_title'] = AyroAdmin::DEFAULT_CHATBOX_HEADER_TITLE;
+    }
+    if (!isset($this->settings['chatbox_input_placeholder'])) {
+      $this->settings['chatbox_input_placeholder'] = AyroAdmin::DEFAULT_CHATBOX_INPUT_PLACEHOLDER;
+    }
+    update_option('ayro_settings', $this->settings);
   }
 
   /**
@@ -154,14 +164,14 @@ class AyroAdmin {
   public function addHeaderTitleFieldCallback() {
     printf(
       '<input id="chatbox_header_title" class="regular-text" type="text" name="ayro_settings[chatbox_header_title]" value="%s">',
-      isset($this->settings['chatbox_header_title']) ? esc_attr($this->settings['chatbox_header_title']) : AyroAdmin::DEFAULT_CHATBOX_HEADER_TITLE
+      esc_attr($this->settings['chatbox_header_title'])
     );
   }
 
   public function addInputPlaceholderFieldCallback() {
     printf(
       '<input id="chatbox_input_placeholder" class="regular-text" type="text" name="ayro_settings[chatbox_input_placeholder]" value="%s">',
-      isset($this->settings['chatbox_input_placeholder']) ? esc_attr($this->settings['chatbox_input_placeholder']) : AyroAdmin::DEFAULT_CHATBOX_INPUT_PLACEHOLDER
+      esc_attr($this->settings['chatbox_input_placeholder'])
     );
   }
 
