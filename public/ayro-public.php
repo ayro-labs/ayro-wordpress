@@ -48,6 +48,7 @@ class AyroPublic {
       'sounds' => $settings['sounds'],
       'chatboxHeaderTitle' => $settings['chatbox_header_title'],
       'chatboxInputPlaceholder' => $settings['chatbox_input_placeholder'],
+      'chatboxConnectChannelsMessage' => $settings['chatbox_connect_channels_message'],
     );
     wp_localize_script('ayro-script-init', 'config', $config);
     wp_enqueue_script('ayro-script-init');

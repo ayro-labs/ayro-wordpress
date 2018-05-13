@@ -9,6 +9,7 @@ class AyroAdmin {
 
   const DEFAULT_CHATBOX_HEADER_TITLE = 'Como podemos ajudá-lo?';
   const DEFAULT_CHATBOX_INPUT_PLACEHOLDER = 'Digite uma mensagem...';
+  const DEFAULT_CONNECT_CHANNELS_MESSAGE = 'Conecte seus aplicativos e seja notificado dentro deles quando for respondido.';
 
   /**
    * The ID of this plugin.
@@ -40,6 +41,9 @@ class AyroAdmin {
     }
     if (!isset($this->settings['chatbox_input_placeholder'])) {
       $this->settings['chatbox_input_placeholder'] = AyroAdmin::DEFAULT_CHATBOX_INPUT_PLACEHOLDER;
+    }
+    if (!isset($this->settings['chatbox_connect_channels_message'])) {
+      $this->settings['chatbox_connect_channels_message'] = AyroAdmin::DEFAULT_CONNECT_CHANNELS_MESSAGE;
     }
     update_option('ayro_settings', $this->settings);
   }
@@ -144,6 +148,14 @@ class AyroAdmin {
       'ayro_settings',
       'ayro_section_chatbox_translation'
     );
+
+    add_settings_field(
+      'chatbox_connect_channels_message',
+      'Connect channels message',
+      array($this, 'addConnectChannelsMessageFieldCallback'),
+      'ayro_settings',
+      'ayro_section_chatbox_translation'
+    );
   }
 
   public function addAppTokenFieldCallback() {
@@ -175,6 +187,13 @@ class AyroAdmin {
     );
   }
 
+  public function addConnectChannelsMessageFieldCallback() {
+    printf(
+      '<input id="chatbox_connect_channels_message" class="large-text" type="text" name="ayro_settings[chatbox_connect_channels_message]" value="%s">',
+      esc_attr($this->settings['chatbox_connect_channels_message'])
+    );
+  }
+
   public function sanitizeSettings($input) {
     $values = array();
     if (isset($input['app_token'])) {
@@ -188,6 +207,9 @@ class AyroAdmin {
     }
     if (isset($input['chatbox_input_placeholder'])) {
       $values['chatbox_input_placeholder'] = sanitize_text_field($input['chatbox_input_placeholder']);
+    }
+    if (isset($input['chatbox_connect_channels_message'])) {
+      $values['chatbox_connect_channels_message'] = sanitize_text_field($input['chatbox_connect_channels_message']);
     }
     return $values;
   }

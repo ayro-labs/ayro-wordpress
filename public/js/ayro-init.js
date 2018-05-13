@@ -7,6 +7,7 @@
     chatbox: {
       title: config.chatboxHeaderTitle,
       input_placeholder: config.chatboxInputPlaceholder,
+      connect_channels_message: config.chatboxConnectChannelsMessage,
     },
   });
 }());
