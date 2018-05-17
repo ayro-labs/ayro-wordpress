@@ -22,9 +22,14 @@ class AyroPlugin {
   private $name;
 
   /**
-   * The current version of the plugin.
+   * The current version of this plugin.
    */
   private $version;
+
+  /**
+   * The current version of the javascript library.
+   */
+  private $libraryVersion;
 
   /**
    * Define the core functionality of the plugin.
@@ -34,12 +39,20 @@ class AyroPlugin {
    * the public-facing side of the site.
    */
   public function __construct() {
-    $this->version = AYRO_PLUGIN_VERSION;
     $this->name = AYRO_PLUGIN_NAME;
+    $this->version = AYRO_PLUGIN_VERSION;
+    $this->libraryVersion = AYRO_LIBRARY_VERSION;
     $this->loadDependencies();
     $this->setLocale();
     $this->defineAdminHooks();
     $this->definePublicHooks();
+  }
+
+  /**
+   * The reference to the class that orchestrates the hooks with the plugin.
+   */
+  public function getLoader() {
+    return $this->loader;
   }
 
   /**
@@ -51,17 +64,17 @@ class AyroPlugin {
   }
 
   /**
-   * The reference to the class that orchestrates the hooks with the plugin.
+   * Retrieve the version number of the plugin.
    */
-  public function getLoader() {
-    return $this->loader;
+  public function getVersion() {
+    return $this->version;
   }
 
   /**
    * Retrieve the version number of the plugin.
    */
-  public function getVersion() {
-    return $this->version;
+  public function getLibraryVersion() {
+    return $this->libraryVersion;
   }
 
   /**
@@ -120,7 +133,7 @@ class AyroPlugin {
    * of the plugin.
    */
   private function defineAdminHooks() {
-    $ayroAdmin = new AyroAdmin($this->getName(), $this->getVersion());
+    $ayroAdmin = new AyroAdmin();
     $this->loader->addAction('admin_enqueue_scripts', $ayroAdmin, 'enqueueStyles');
     $this->loader->addAction('admin_enqueue_scripts', $ayroAdmin, 'enqueueScripts');
     $this->loader->addAction('admin_menu', $ayroAdmin, 'createSettingsPage');
@@ -132,7 +145,7 @@ class AyroPlugin {
    * of the plugin.
    */
   private function definePublicHooks() {
-    $ayroPublic = new AyroPublic($this->getName(), $this->getVersion());
+    $ayroPublic = new AyroPublic($this->libraryVersion);
     $this->loader->addAction('wp_enqueue_scripts', $ayroPublic, 'enqueueStyles');
     $this->loader->addAction('wp_enqueue_scripts', $ayroPublic, 'enqueueScripts');
   }

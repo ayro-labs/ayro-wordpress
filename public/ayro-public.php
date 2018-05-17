@@ -2,27 +2,19 @@
 
 /**
  * The public-specific functionality of the plugin.
- *
- * Defines the plugin name, version, and enqueue the public-specific stylesheet and JavaScript.
  */
 class AyroPublic {
 
   /**
-   * The ID of this plugin.
+   * The version of the javascript library.
    */
-  private $pluginName;
-
-  /**
-   * The version of this plugin.
-   */
-  private $pluginVersion;
+  private $libraryVersion;
 
   /**
    * Initialize the class and set its properties.
    */
-  public function __construct($pluginName, $pluginVersion) {
-    $this->pluginName = $pluginName;
-    $this->pluginVersion = $pluginVersion;
+  public function __construct($libraryVersion) {
+    $this->libraryVersion = $libraryVersion;
   }
 
   /**
@@ -37,7 +29,7 @@ class AyroPublic {
    */
   public function enqueueScripts() {
     // Ayro widget script
-    wp_register_script('ayro-script', plugins_url('js/ayro-wordpress.min.js', __FILE__, array(), false, true));
+    wp_register_script('ayro-script', 'https://cdn.ayro.io/sdks/ayro-'.$this->libraryVersion.'.min.js');
     wp_enqueue_script('ayro-script');
 
     // Ayro init script

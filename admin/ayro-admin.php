@@ -2,24 +2,12 @@
 
 /**
  * The admin-specific functionality of the plugin.
- *
- * Defines the plugin name, version, and enqueue the admin-specific stylesheet and JavaScript.
  */
 class AyroAdmin {
 
   const DEFAULT_CHATBOX_HEADER_TITLE = 'Como podemos ajudá-lo?';
   const DEFAULT_CHATBOX_INPUT_PLACEHOLDER = 'Digite uma mensagem...';
   const DEFAULT_CONNECT_CHANNELS_MESSAGE = 'Conecte seus aplicativos e seja notificado dentro deles quando for respondido.';
-
-  /**
-   * The ID of this plugin.
-   */
-  private $pluginName;
-
-  /**
-   * The version of this plugin.
-   */
-  private $pluginVersion;
 
   /**
    * Admin defined settings for the plugin.
@@ -29,9 +17,7 @@ class AyroAdmin {
   /**
    * Initializes the class and set its properties.
    */
-  public function __construct($pluginName, $pluginVersion) {
-    $this->pluginName = $pluginName;
-    $this->pluginVersion = $pluginVersion;
+  public function __construct() {
     $this->settings = get_option('ayro_settings');
     if (!isset($this->settings['sounds'])) {
       $this->settings['sounds'] = '1';

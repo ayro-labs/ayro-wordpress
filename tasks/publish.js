@@ -1,6 +1,6 @@
 'use strict';
 
-const packageJson = require('../package');
+const project = require('../package');
 const {publishTask, commands} = require('@ayro/commons');
 const path = require('path');
 const GitHubApi = require('@octokit/rest');
@@ -46,9 +46,9 @@ async function copyGithubFiles() {
 async function pushGithubFiles() {
   commands.log('Committing, tagging and pushing files to Github repository...');
   await commands.exec('git add --all', TEMP_GITHUB_REPOSITORY_DIR);
-  await commands.exec(`git commit -am 'Release ${packageJson.version}'`, TEMP_GITHUB_REPOSITORY_DIR);
+  await commands.exec(`git commit -am 'Release ${project.version}'`, TEMP_GITHUB_REPOSITORY_DIR);
   await commands.exec('git push origin master', TEMP_GITHUB_REPOSITORY_DIR);
-  await commands.exec(`git tag ${packageJson.version}`, TEMP_GITHUB_REPOSITORY_DIR);
+  await commands.exec(`git tag ${project.version}`, TEMP_GITHUB_REPOSITORY_DIR);
   await commands.exec('git push --tags', TEMP_GITHUB_REPOSITORY_DIR);
 }
 
@@ -57,8 +57,8 @@ async function createGithubRelease() {
   await createReleaseAsync({
     owner: GITHUB_REPOSITORY_OWNER,
     repo: GITHUB_REPOSITORY_NAME,
-    tag_name: packageJson.version,
-    name: `Release ${packageJson.version}`,
+    tag_name: project.version,
+    name: `Release ${project.version}`,
   });
 }
 
@@ -86,7 +86,7 @@ async function copyFilesToSvnTrunk() {
 async function pushFilesToSvnTrunk() {
   commands.log('Committing and pushing files to Subversion trunk repository...');
   await commands.exec('svn add * --force', TEMP_WP_TRUNK_REPOSITORY_DIR);
-  await commands.exec(`svn commit --force-interactive --username ${WP_REPOSITORY_USERNAME} -m 'Release ${packageJson.version}'`, TEMP_WP_TRUNK_REPOSITORY_DIR);
+  await commands.exec(`svn commit --force-interactive --username ${WP_REPOSITORY_USERNAME} -m 'Release ${project.version}'`, TEMP_WP_TRUNK_REPOSITORY_DIR);
 }
 
 async function prepareSvnAssetsRepository() {
@@ -104,7 +104,7 @@ async function copyFilesToSvnAssets() {
 async function pushFilesToSvnAssets() {
   commands.log('Committing and pushing files to Subversion assets repository...');
   await commands.exec('svn add * --force', TEMP_WP_ASSETS_REPOSITORY_DIR);
-  await commands.exec(`svn commit --force-interactive --username ${WP_REPOSITORY_USERNAME} -m 'Release ${packageJson.version}'`, TEMP_WP_ASSETS_REPOSITORY_DIR);
+  await commands.exec(`svn commit --force-interactive --username ${WP_REPOSITORY_USERNAME} -m 'Release ${project.version}'`, TEMP_WP_ASSETS_REPOSITORY_DIR);
 }
 
 async function publishToWordPressSvn() {
