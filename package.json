@@ -17,12 +17,12 @@
   },
   "devDependencies": {
     "@ayro/commons": "0.0.25",
-    "@octokit/rest": "15.2.6",
+    "@octokit/rest": "15.6.0",
     "axios": "0.18.0",
     "bluebird": "3.5.1",
     "eslint": "4.19.1",
     "eslint-config-airbnb-base": "12.1.0",
-    "eslint-plugin-import": "2.11.0",
+    "eslint-plugin-import": "2.12.0",
     "lodash": "4.17.10"
   }
 }
