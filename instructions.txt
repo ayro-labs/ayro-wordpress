@@ -1,0 +1,23 @@
+## Installing dependencies ##
+
+````
+npm install
+````
+
+## Building the project ##
+
+````
+npm run build
+````
+
+## Releasing a new version ##
+
+````
+npm run release-plugin -- major|minor|patch|version
+````
+
+## Publishing the new version to Github and WordPress repository ##
+
+````
+npm run publish-plugin
+````
