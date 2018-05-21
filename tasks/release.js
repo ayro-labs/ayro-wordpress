@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 'use strict';
 
 const {releaseTask, commands} = require('@ayro/commons');
