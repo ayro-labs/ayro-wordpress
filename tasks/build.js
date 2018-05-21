@@ -11,7 +11,17 @@ const DIST_DIR = 'dist';
 const AYRO_DIR = 'ayro';
 const DIST_AYRO_DIR = `${DIST_DIR}/${AYRO_DIR}`;
 const ZIP_NAME = 'ayro-wordpress.zip';
-const ZIP_FILES = ['admin', 'includes', 'languages', 'public', 'ayro.php', 'index.php', 'uninstall.php', 'readme.md', 'license.txt'];
+const ZIP_FILES = [
+  'src/admin',
+  'src/includes',
+  'src/languages',
+  'src/public',
+  'src/ayro.php',
+  'src/index.php',
+  'src/uninstall.php',
+  'src/readme.md',
+  'license.txt',
+];
 
 async function build() {
   try {

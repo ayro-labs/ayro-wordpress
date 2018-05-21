@@ -9,7 +9,7 @@ const util = require('util');
 const Promise = require('bluebird');
 
 const WORKING_DIR = path.resolve(__dirname, '../');
-const MAIN_PHP_FILE = path.join(WORKING_DIR, 'ayro.php');
+const MAIN_PHP_FILE = path.join(WORKING_DIR, 'src', 'ayro.php');
 const PLUGIN_VERSION_REGEX = /Version:\s{11}(\d+\.\d+\.\d+)/;
 const PLUGIN_VERSION_FORMAT = 'Version:           %s';
 const PLUGIN_VERSION_DEFINE_REGEX = /define\('AYRO_PLUGIN_VERSION', '(\d+\.\d+\.\d+)'\);/;

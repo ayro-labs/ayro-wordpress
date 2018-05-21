@@ -29,7 +29,7 @@ class AyroPublic {
    */
   public function enqueueScripts() {
     // Ayro widget script
-    wp_register_script('ayro-script', 'https://cdn.ayro.io/sdks/ayro-'.$this->libraryVersion.'.min.js');
+    wp_register_script('ayro-script', 'https://cdn.ayro.io/sdks/ayro-' . $this->libraryVersion . '.min.js');
     wp_enqueue_script('ayro-script');
 
     // Ayro init script

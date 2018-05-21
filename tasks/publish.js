@@ -100,7 +100,7 @@ async function prepareSvnAssetsRepository() {
 
 async function copyFilesToSvnAssets() {
   commands.log('Copying files to Subversion assets repository...');
-  await commands.exec(`cp assets/* ${TEMP_WP_ASSETS_REPOSITORY_DIR}`);
+  await commands.exec(`cp src/assets/* ${TEMP_WP_ASSETS_REPOSITORY_DIR}`);
 }
 
 async function pushFilesToSvnAssets() {
