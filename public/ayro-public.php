@@ -41,6 +41,10 @@ class AyroPublic {
       'chatboxHeaderTitle' => $settings['chatbox_header_title'],
       'chatboxInputPlaceholder' => $settings['chatbox_input_placeholder'],
       'chatboxConnectChannelsMessage' => $settings['chatbox_connect_channels_message'],
+      'connectEmailDescription' => $settings['connect_email_description'],
+      'connectEmailInputPlaceholder' => $settings['connect_email_input_placeholder'],
+      'connectEmailSendButton' => $settings['connect_email_send_button'],
+      'connectEmailSuccessMessage' => $settings['connect_email_success_message'],
     );
     wp_localize_script('ayro-script-init', 'config', $config);
     wp_enqueue_script('ayro-script-init');
