@@ -42,7 +42,7 @@ async function prepareGithubRepository() {
 
 async function copyGithubFiles() {
   commands.log('Copying files to Github repository...');
-  await commands.exec(`cp dist/ayro-wordpress.zip ${TEMP_GITHUB_REPOSITORY_DIR}`);
+  await commands.exec(`cp dist/ayro-wordpress.zip ${TEMP_GITHUB_REPOSITORY_DIR}/ayro-wordpress-${project.version}.zip`);
 }
 
 async function pushGithubFiles() {
