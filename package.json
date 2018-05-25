@@ -16,8 +16,8 @@
     "publish-plugin": "node tasks/publish.js"
   },
   "devDependencies": {
-    "@ayro/commons": "0.0.26",
-    "@octokit/rest": "15.6.0",
+    "@ayro/commons": "0.0.29",
+    "@octokit/rest": "15.7.0",
     "axios": "0.18.0",
     "bluebird": "3.5.1",
     "eslint": "4.19.1",

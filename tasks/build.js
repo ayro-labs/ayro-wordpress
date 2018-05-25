@@ -6,7 +6,7 @@ const {commands} = require('@ayro/commons');
 const path = require('path');
 const _ = require('lodash');
 
-const WORKING_DIR = path.resolve(__dirname, '../');
+const WORKING_DIR = path.resolve();
 const DIST_DIR = 'dist';
 const AYRO_DIR = 'ayro';
 const DIST_AYRO_DIR = `${DIST_DIR}/${AYRO_DIR}`;
@@ -30,7 +30,7 @@ async function build() {
     await commands.exec(`mkdir -p ${DIST_AYRO_DIR}`, WORKING_DIR);
     await commands.exec(`cp -Rf ${_.join(ZIP_FILES, ' ')} ${DIST_AYRO_DIR}`, WORKING_DIR);
     await commands.exec(`cd ${DIST_AYRO_DIR}`, WORKING_DIR);
-    await commands.exec(`zip -r ${ZIP_NAME} ${AYRO_DIR}`, path.join(WORKING_DIR, DIST_DIR));
+    await commands.exec(`zip -r ${ZIP_NAME} ${AYRO_DIR}`, path.resolve(DIST_DIR));
     await commands.exec(`rm -Rf ${DIST_AYRO_DIR}`, WORKING_DIR);
   } catch (err) {
     commands.logError(`Error building plugin: ${err.message}`);

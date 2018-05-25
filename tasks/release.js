@@ -2,14 +2,14 @@
 
 'use strict';
 
-const {releaseTask, commands} = require('@ayro/commons');
+const {commands, release} = require('@ayro/commons');
 const fs = require('fs');
 const path = require('path');
 const util = require('util');
 const Promise = require('bluebird');
 
-const WORKING_DIR = path.resolve(__dirname, '../');
-const MAIN_PHP_FILE = path.join(WORKING_DIR, 'src', 'ayro.php');
+const WORKING_DIR = path.resolve();
+const MAIN_PHP_FILE = path.resolve('src', 'ayro.php');
 const PLUGIN_VERSION_REGEX = /Version:\s{11}(\d+\.\d+\.\d+)/;
 const PLUGIN_VERSION_FORMAT = 'Version:           %s';
 const PLUGIN_VERSION_DEFINE_REGEX = /define\('AYRO_PLUGIN_VERSION', '(\d+\.\d+\.\d+)'\);/;
@@ -53,8 +53,8 @@ async function updateProjectVersion(version) {
 
 // Run this if call directly from command line
 if (require.main === module) {
-  releaseTask.withWorkingDir(WORKING_DIR);
-  releaseTask.withAfterVersionUpdateTask(updateProjectVersion);
-  releaseTask.withBuildTask(buildPlugin);
-  releaseTask.run(process.argv[2], process.argv[3]);
+  release.withWorkingDir(WORKING_DIR);
+  release.withAfterVersionUpdateTask(updateProjectVersion);
+  release.withBuildTask(buildPlugin);
+  release.run(process.argv[2], process.argv[3]);
 }

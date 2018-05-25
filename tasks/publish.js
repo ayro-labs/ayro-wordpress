@@ -3,12 +3,12 @@
 'use strict';
 
 const project = require('../package');
-const {publishTask, commands} = require('@ayro/commons');
+const {commands, publish} = require('@ayro/commons');
 const path = require('path');
 const GitHubApi = require('@octokit/rest');
 const Promise = require('bluebird');
 
-const WORKING_DIR = path.resolve(__dirname, '../');
+const WORKING_DIR = path.resolve();
 const GITHUB_REPOSITORY_NAME = 'ayro-wordpress';
 const GITHUB_REPOSITORY_OWNER = 'ayrolabs';
 const WP_REPOSITORY_USERNAME = 'ayrolabs';
@@ -120,9 +120,9 @@ async function publishToWordPressSvn() {
 
 // Run this if call directly from command line
 if (require.main === module) {
-  publishTask.withWorkingDir(WORKING_DIR);
-  publishTask.withBuildTask(buildPlugin);
-  publishTask.withBeforePublishTask(beforePublish);
-  publishTask.withPublishTask(publishToWordPressSvn);
-  publishTask.run();
+  publish.withWorkingDir(WORKING_DIR);
+  publish.withBuildTask(buildPlugin);
+  publish.withBeforePublishTask(beforePublish);
+  publish.withPublishTask(publishToWordPressSvn);
+  publish.run();
 }
