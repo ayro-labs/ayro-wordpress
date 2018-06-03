@@ -161,7 +161,7 @@ class AyroAdmin {
 
     add_settings_field(
       'connect_channels_message_ask_for_email',
-      'Leave your email',
+      'Ask for email',
       array($this, 'printAskForEmailInputCallback'),
       'ayro_settings',
       'ayro_section_connect_channels_message'

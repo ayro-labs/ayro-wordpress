@@ -28,8 +28,14 @@ class AyroPublic {
    * Register the JavaScript for the public area.
    */
   public function enqueueScripts() {
+    $libraryUrl = null;
+    if (AYRO_ENV === 'development') {
+      $libraryUrl = 'http://localhost:9000/dist/ayro.js';
+    } else {
+      $libraryUrl = 'https://cdn.ayro.io/sdks/ayro-' . $this->libraryVersion . '.min.js';
+    }
     // Ayro widget script
-    wp_register_script('ayro-script', 'https://cdn.ayro.io/sdks/ayro-' . $this->libraryVersion . '.min.js');
+    wp_register_script('ayro-script', $libraryUrl);
     wp_enqueue_script('ayro-script');
 
     // Ayro init script
