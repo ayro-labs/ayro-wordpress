@@ -9,12 +9,12 @@ Ayro.init({
   chatbox: {
     title: config.chatboxHeaderTitle,
     input_placeholder: config.chatboxInputPlaceholder,
-    connect_channels_message: config.chatboxConnectChannelsMessage,
   },
-  connect_email: {
-    description: config.connectEmailDescription,
-    input_placeholder: config.connectEmailInputPlaceholder,
-    send_button: config.connectEmailSendButton,
-    success_message: config.connectEmailSuccessMessage,
+  connect_channels_message: {
+    ask_for_email: config.askForEmail,
+    email_provided: config.emailProvided,
+    email_input_placeholder: config.emailInputPlaceholder,
+    send_email_button: config.sendEmailButton,
+    edit_email_button: config.editEmailButton,
   },
 });

@@ -5,14 +5,14 @@
  */
 class AyroAdmin {
 
-  const DEFAULT_CHATBOX_HEADER_TITLE = 'Como podemos ajudá-lo?';
-  const DEFAULT_CHATBOX_INPUT_PLACEHOLDER = 'Digite uma mensagem...';
-  const DEFAULT_CHATBOX_CONNECT_CHANNELS_MESSAGE = 'Conecte seus aplicativos e seja notificado dentro deles quando for respondido.';
+  const CHATBOX_HEADER_TITLE = 'Como podemos ajudá-lo?';
+  const CHATBOX_INPUT_PLACEHOLDER = 'Digite uma mensagem...';
 
-  const DEFAULT_CONNECT_EMAIL_DESCRIPTION = 'Conecte seu email e seja notificado quando receber uma resposta.';
-  const DEFAULT_CONNECT_EMAIL_INPUT_PLACEHOLDER = 'Digite seu email...';
-  const DEFAULT_CONNECT_EMAIL_SEND_BUTTON = 'Enviar';
-  const DEFAULT_CONNECT_EMAIL_SUCCESS_MESSAGE = 'Email conectado com sucesso!';
+  const ASK_FOR_EMAIL = 'Deixe seu email:';
+  const EMAIL_PROVIDED = 'Agora também podemos trocar mensagens por e-mail.';
+  const EMAIL_INPUT_PLACEHOLDER = 'Digite seu email...';
+  const SEND_EMAIL_BUTTON = 'Enviar';
+  const EDIT_EMAIL_BUTTON = 'Editar';
 
   /**
    * Admin defined settings for the plugin.
@@ -28,25 +28,25 @@ class AyroAdmin {
       $this->settings['sounds'] = '1';
     }
     if (!isset($this->settings['chatbox_header_title'])) {
-      $this->settings['chatbox_header_title'] = AyroAdmin::DEFAULT_CHATBOX_HEADER_TITLE;
+      $this->settings['chatbox_header_title'] = AyroAdmin::CHATBOX_HEADER_TITLE;
     }
     if (!isset($this->settings['chatbox_input_placeholder'])) {
-      $this->settings['chatbox_input_placeholder'] = AyroAdmin::DEFAULT_CHATBOX_INPUT_PLACEHOLDER;
+      $this->settings['chatbox_input_placeholder'] = AyroAdmin::CHATBOX_INPUT_PLACEHOLDER;
     }
-    if (!isset($this->settings['chatbox_connect_channels_message'])) {
-      $this->settings['chatbox_connect_channels_message'] = AyroAdmin::DEFAULT_CHATBOX_CONNECT_CHANNELS_MESSAGE;
+    if (!isset($this->settings['connect_channels_message_ask_for_email'])) {
+      $this->settings['connect_channels_message_ask_for_email'] = AyroAdmin::ASK_FOR_EMAIL;
     }
-    if (!isset($this->settings['connect_email_description'])) {
-      $this->settings['connect_email_description'] = AyroAdmin::DEFAULT_CONNECT_EMAIL_DESCRIPTION;
+    if (!isset($this->settings['connect_channels_message_email_provided'])) {
+      $this->settings['connect_channels_message_email_provided'] = AyroAdmin::EMAIL_PROVIDED;
     }
-    if (!isset($this->settings['connect_email_input_placeholder'])) {
-      $this->settings['connect_email_input_placeholder'] = AyroAdmin::DEFAULT_CONNECT_EMAIL_INPUT_PLACEHOLDER;
+    if (!isset($this->settings['connect_channels_message_email_input_placeholder'])) {
+      $this->settings['connect_channels_message_email_input_placeholder'] = AyroAdmin::EMAIL_INPUT_PLACEHOLDER;
     }
-    if (!isset($this->settings['connect_email_send_button'])) {
-      $this->settings['connect_email_send_button'] = AyroAdmin::DEFAULT_CONNECT_EMAIL_SEND_BUTTON;
+    if (!isset($this->settings['connect_channels_message_send_email_button'])) {
+      $this->settings['connect_channels_message_send_email_button'] = AyroAdmin::SEND_EMAIL_BUTTON;
     }
-    if (!isset($this->settings['connect_email_success_message'])) {
-      $this->settings['connect_email_success_message'] = AyroAdmin::DEFAULT_CONNECT_EMAIL_SUCCESS_MESSAGE;
+    if (!isset($this->settings['connect_channels_message_edit_email_button'])) {
+      $this->settings['connect_channels_message_edit_email_button'] = AyroAdmin::EDIT_EMAIL_BUTTON;
     }
     update_option('ayro_settings', $this->settings);
   }
@@ -121,8 +121,8 @@ class AyroAdmin {
     );
 
     add_settings_section(
-      'ayro_section_connect_email',
-      'Connect Email',
+      'ayro_section_connect_channels_message',
+      'Connect channels message',
       null,
       'ayro_settings'
     );
@@ -130,7 +130,7 @@ class AyroAdmin {
     add_settings_field(
       'app_token',
       'App Token',
-      array($this, 'addGeneralSettingsAppTokenCallback'),
+      array($this, 'printAppTokenInputCallback'),
       'ayro_settings',
       'ayro_section_general_settings'
     );
@@ -138,7 +138,7 @@ class AyroAdmin {
     add_settings_field(
       'sounds',
       'Notification sound',
-      array($this, 'addGeneralSettingsNotificationSoundCallback'),
+      array($this, 'printNotificationSoundInputCallback'),
       'ayro_settings',
       'ayro_section_general_settings'
     );
@@ -146,7 +146,7 @@ class AyroAdmin {
     add_settings_field(
       'chatbox_header_title',
       'Header title',
-      array($this, 'addChatboxHeaderTitleCallback'),
+      array($this, 'printChatboxHeaderTitleInputCallback'),
       'ayro_settings',
       'ayro_section_chatbox'
     );
@@ -154,60 +154,60 @@ class AyroAdmin {
     add_settings_field(
       'chatbox_input_placeholder',
       'Input placeholder',
-      array($this, 'addChatboxInputPlaceholderCallback'),
+      array($this, 'printChatboxInputPlaceholderInputCallback'),
       'ayro_settings',
       'ayro_section_chatbox'
     );
 
     add_settings_field(
-      'chatbox_connect_channels_message',
-      'Connect channels message',
-      array($this, 'addChatboxConnectChannelsMessageCallback'),
+      'connect_channels_message_ask_for_email',
+      'Leave your email',
+      array($this, 'printAskForEmailInputCallback'),
       'ayro_settings',
-      'ayro_section_chatbox'
+      'ayro_section_connect_channels_message'
     );
 
     add_settings_field(
-      'connect_email_description',
-      'Description',
-      array($this, 'addConnectEmailDescriptionCallback'),
+      'connect_channels_message_email_provided',
+      'Email provided',
+      array($this, 'printEmailProvidedInputCallback'),
       'ayro_settings',
-      'ayro_section_connect_email'
+      'ayro_section_connect_channels_message'
     );
 
     add_settings_field(
-      'connect_email_input_placeholder',
-      'Input placeholder',
-      array($this, 'addConnectEmailInputPlaceholderCallback'),
+      'connect_channels_message_email_input_placeholder',
+      'Email input placeholder',
+      array($this, 'printEmailInputPlaceholderInputCallback'),
       'ayro_settings',
-      'ayro_section_connect_email'
+      'ayro_section_connect_channels_message'
     );
 
     add_settings_field(
-      'connect_email_send_button',
-      'Send button',
-      array($this, 'addConnectEmailSendButtonCallback'),
+      'connect_channels_message_send_email_button',
+      'Send email button',
+      array($this, 'printSendEmailButtonInputCallback'),
       'ayro_settings',
-      'ayro_section_connect_email'
+      'ayro_section_connect_channels_message'
     );
 
     add_settings_field(
-      'connect_email_success_message',
-      'Success message',
-      array($this, 'addConnectEmailSuccessMessageCallback'),
+      'connect_channels_message_edit_email_button',
+      'Edit email button',
+      array($this, 'printEditEmailButtonInputCallback'),
       'ayro_settings',
-      'ayro_section_connect_email'
+      'ayro_section_connect_channels_message'
     );
   }
 
-  public function addGeneralSettingsAppTokenCallback() {
+  public function printAppTokenInputCallback() {
     printf(
       '<input id="app_token" class="regular-text" type="text" name="ayro_settings[app_token]" value="%s">',
       isset($this->settings['app_token']) ? esc_attr($this->settings['app_token']) : ''
     );
   }
 
-  public function addGeneralSettingsNotificationSoundCallback() {
+  public function printNotificationSoundInputCallback() {
     $checked = '';
     if (isset($this->settings['sounds'])) {
       $checked = 'checked="checked"';
@@ -215,52 +215,52 @@ class AyroAdmin {
     echo '<input '.$checked.' id="sounds" type="checkbox" name="ayro_settings[sounds]" value="1"/>';
   }
 
-  public function addChatboxHeaderTitleCallback() {
+  public function printChatboxHeaderTitleInputCallback() {
     printf(
       '<input id="chatbox_header_title" class="regular-text" type="text" name="ayro_settings[chatbox_header_title]" value="%s">',
       esc_attr($this->settings['chatbox_header_title'])
     );
   }
 
-  public function addChatboxInputPlaceholderCallback() {
+  public function printChatboxInputPlaceholderInputCallback() {
     printf(
       '<input id="chatbox_input_placeholder" class="regular-text" type="text" name="ayro_settings[chatbox_input_placeholder]" value="%s">',
       esc_attr($this->settings['chatbox_input_placeholder'])
     );
   }
 
-  public function addChatboxConnectChannelsMessageCallback() {
+  public function printAskForEmailInputCallback() {
     printf(
-      '<input id="chatbox_connect_channels_message" class="large-text" type="text" name="ayro_settings[chatbox_connect_channels_message]" value="%s">',
-      esc_attr($this->settings['chatbox_connect_channels_message'])
+      '<input id="connect_channels_message_ask_for_email" class="large-text" type="text" name="ayro_settings[connect_channels_message_ask_for_email]" value="%s">',
+      esc_attr($this->settings['connect_channels_message_ask_for_email'])
     );
   }
 
-  public function addConnectEmailDescriptionCallback() {
+  public function printEmailProvidedInputCallback() {
     printf(
-      '<input id="connect_email_description" class="large-text" type="text" name="ayro_settings[connect_email_description]" value="%s">',
-      esc_attr($this->settings['connect_email_description'])
+      '<input id="connect_channels_message_email_provided" class="large-text" type="text" name="ayro_settings[connect_channels_message_email_provided]" value="%s">',
+      esc_attr($this->settings['connect_channels_message_email_provided'])
     );
   }
 
-  public function addConnectEmailInputPlaceholderCallback() {
+  public function printEmailInputPlaceholderInputCallback() {
     printf(
-      '<input id="connect_email_input_placeholder" class="regular-text" type="text" name="ayro_settings[connect_email_input_placeholder]" value="%s">',
-      esc_attr($this->settings['connect_email_input_placeholder'])
+      '<input id="connect_channels_message_email_input_placeholder" class="regular-text" type="text" name="ayro_settings[connect_channels_message_email_input_placeholder]" value="%s">',
+      esc_attr($this->settings['connect_channels_message_email_input_placeholder'])
     );
   }
 
-  public function addConnectEmailSendButtonCallback() {
+  public function printSendEmailButtonInputCallback() {
     printf(
-      '<input id="connect_email_send_button" class="regular-text" type="text" name="ayro_settings[connect_email_send_button]" value="%s">',
-      esc_attr($this->settings['connect_email_send_button'])
+      '<input id="connect_channels_message_send_email_button" class="regular-text" type="text" name="ayro_settings[connect_channels_message_send_email_button]" value="%s">',
+      esc_attr($this->settings['connect_channels_message_send_email_button'])
     );
   }
 
-  public function addConnectEmailSuccessMessageCallback() {
+  public function printEditEmailButtonInputCallback() {
     printf(
-      '<input id="connect_email_success_message" class="regular-text" type="text" name="ayro_settings[connect_email_success_message]" value="%s">',
-      esc_attr($this->settings['connect_email_success_message'])
+      '<input id="connect_channels_message_edit_email_button" class="regular-text" type="text" name="ayro_settings[connect_channels_message_edit_email_button]" value="%s">',
+      esc_attr($this->settings['connect_channels_message_edit_email_button'])
     );
   }
 
@@ -278,20 +278,20 @@ class AyroAdmin {
     if (isset($input['chatbox_input_placeholder'])) {
       $values['chatbox_input_placeholder'] = sanitize_text_field($input['chatbox_input_placeholder']);
     }
-    if (isset($input['chatbox_connect_channels_message'])) {
-      $values['chatbox_connect_channels_message'] = sanitize_text_field($input['chatbox_connect_channels_message']);
+    if (isset($input['connect_channels_message_ask_for_email'])) {
+      $values['connect_channels_message_ask_for_email'] = sanitize_text_field($input['connect_channels_message_ask_for_email']);
     }
-    if (isset($input['connect_email_description'])) {
-      $values['connect_email_description'] = sanitize_text_field($input['connect_email_description']);
+    if (isset($input['connect_channels_message_email_provided'])) {
+      $values['connect_channels_message_email_provided'] = sanitize_text_field($input['connect_channels_message_email_provided']);
     }
-    if (isset($input['connect_email_input_placeholder'])) {
-      $values['connect_email_input_placeholder'] = sanitize_text_field($input['connect_email_input_placeholder']);
+    if (isset($input['connect_channels_message_email_input_placeholder'])) {
+      $values['connect_channels_message_email_input_placeholder'] = sanitize_text_field($input['connect_channels_message_email_input_placeholder']);
     }
-    if (isset($input['connect_email_send_button'])) {
-      $values['connect_email_send_button'] = sanitize_text_field($input['connect_email_send_button']);
+    if (isset($input['connect_channels_message_send_email_button'])) {
+      $values['connect_channels_message_send_email_button'] = sanitize_text_field($input['connect_channels_message_send_email_button']);
     }
-    if (isset($input['connect_email_success_message'])) {
-      $values['connect_email_success_message'] = sanitize_text_field($input['connect_email_success_message']);
+    if (isset($input['connect_channels_message_edit_email_button'])) {
+      $values['connect_channels_message_edit_email_button'] = sanitize_text_field($input['connect_channels_message_edit_email_button']);
     }
     return $values;
   }

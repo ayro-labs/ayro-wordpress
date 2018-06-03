@@ -40,12 +40,13 @@ class AyroPublic {
       'sounds' => $settings['sounds'],
       'chatboxHeaderTitle' => $settings['chatbox_header_title'],
       'chatboxInputPlaceholder' => $settings['chatbox_input_placeholder'],
-      'chatboxConnectChannelsMessage' => $settings['chatbox_connect_channels_message'],
-      'connectEmailDescription' => $settings['connect_email_description'],
-      'connectEmailInputPlaceholder' => $settings['connect_email_input_placeholder'],
-      'connectEmailSendButton' => $settings['connect_email_send_button'],
-      'connectEmailSuccessMessage' => $settings['connect_email_success_message'],
+      'askForEmail' => $settings['connect_channels_message_ask_for_email'],
+      'emailProvided' => $settings['connect_channels_message_email_provided'],
+      'emailInputPlaceholder' => $settings['connect_channels_message_email_input_placeholder'],
+      'sendEmailButton' => $settings['connect_channels_message_send_email_button'],
+      'editEmailButton' => $settings['connect_channels_message_edit_email_button'],
     );
+
     wp_localize_script('ayro-script-init', 'config', $config);
     wp_enqueue_script('ayro-script-init');
   }
