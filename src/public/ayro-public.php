@@ -30,7 +30,7 @@ class AyroPublic {
   public function enqueueScripts() {
     $libraryUrl = null;
     if (AYRO_ENV === 'development') {
-      $libraryUrl = 'http://localhost:9000/dist/ayro.js';
+      $libraryUrl = 'https://localhost:9000/dist/ayro.js';
     } else {
       $libraryUrl = 'https://cdn.ayro.io/sdks/ayro-' . $this->libraryVersion . '.min.js';
     }
