@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@ayro/commons": "0.0.29",
-    "@octokit/rest": "15.7.0",
+    "@octokit/rest": "15.8.1",
     "axios": "0.18.0",
     "bluebird": "3.5.1",
     "eslint": "4.19.1",
