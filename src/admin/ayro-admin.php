@@ -10,7 +10,7 @@ class AyroAdmin {
 
   const ASK_FOR_EMAIL = 'Deixe seu email:';
   const EMAIL_PROVIDED = 'Agora também podemos trocar mensagens por e-mail.';
-  const EMAIL_INPUT_PLACEHOLDER = 'Digite seu email...';
+  const EMAIL_INPUT_PLACEHOLDER = 'Email';
   const SEND_EMAIL_BUTTON = 'Enviar';
   const EDIT_EMAIL_BUTTON = 'Editar';
 
