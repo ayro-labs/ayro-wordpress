@@ -16,5 +16,8 @@ Ayro.init({
       send_email_button: config.sendEmailButton,
       edit_email_button: config.editEmailButton,
     },
+    errors: {
+      file_size_limit_exceeded: config.chatboxErrorsFileSizeLimitExceeded,
+    },
   },
 });

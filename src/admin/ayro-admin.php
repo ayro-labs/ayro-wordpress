@@ -7,6 +7,7 @@ class AyroAdmin {
 
   const CHATBOX_HEADER_TITLE = 'Como podemos ajudá-lo?';
   const CHATBOX_INPUT_PLACEHOLDER = 'Digite uma mensagem...';
+  const CHATBOX_ERRORS_FILE_SIZE_LIMIT_EXCEEDED = 'Arquivo deve possuir no máximo 5 MB';
 
   const ASK_FOR_EMAIL = 'Deixe seu email:';
   const EMAIL_PROVIDED = 'Agora também podemos trocar mensagens por e-mail.';
@@ -32,6 +33,9 @@ class AyroAdmin {
     }
     if (!isset($this->settings['chatbox_input_placeholder'])) {
       $this->settings['chatbox_input_placeholder'] = AyroAdmin::CHATBOX_INPUT_PLACEHOLDER;
+    }
+    if (!isset($this->settings['chatbox_errors_file_size_limit_exceeded'])) {
+      $this->settings['chatbox_errors_file_size_limit_exceeded'] = AyroAdmin::CHATBOX_ERRORS_FILE_SIZE_LIMIT_EXCEEDED;
     }
     if (!isset($this->settings['connect_channels_message_ask_for_email'])) {
       $this->settings['connect_channels_message_ask_for_email'] = AyroAdmin::ASK_FOR_EMAIL;
@@ -121,6 +125,13 @@ class AyroAdmin {
     );
 
     add_settings_section(
+      'ayro_section_chatbox_errors',
+      'Chatbox errors',
+      null,
+      'ayro_settings'
+    );
+
+    add_settings_section(
       'ayro_section_connect_channels_message',
       'Connect channels message',
       null,
@@ -157,6 +168,14 @@ class AyroAdmin {
       array($this, 'printChatboxInputPlaceholderInputCallback'),
       'ayro_settings',
       'ayro_section_chatbox'
+    );
+
+    add_settings_field(
+      'chatbox_errors_file_size_limit_exceeded',
+      'File size limit exceeded',
+      array($this, 'printChatboxErrorsFileSizeLimitExceededInputCallback'),
+      'ayro_settings',
+      'ayro_section_chatbox_errors'
     );
 
     add_settings_field(
@@ -229,6 +248,13 @@ class AyroAdmin {
     );
   }
 
+  public function printChatboxErrorsFileSizeLimitExceededInputCallback() {
+    printf(
+      '<input id="chatbox_errors_file_size_limit_exceeded" class="regular-text" type="text" name="ayro_settings[chatbox_errors_file_size_limit_exceeded]" value="%s">',
+      esc_attr($this->settings['chatbox_errors_file_size_limit_exceeded'])
+    );
+  }
+
   public function printAskForEmailInputCallback() {
     printf(
       '<input id="connect_channels_message_ask_for_email" class="large-text" type="text" name="ayro_settings[connect_channels_message_ask_for_email]" value="%s">',
@@ -277,6 +303,9 @@ class AyroAdmin {
     }
     if (isset($input['chatbox_input_placeholder'])) {
       $values['chatbox_input_placeholder'] = sanitize_text_field($input['chatbox_input_placeholder']);
+    }
+    if (isset($input['chatbox_errors_file_size_limit_exceeded'])) {
+      $values['chatbox_errors_file_size_limit_exceeded'] = sanitize_text_field($input['chatbox_errors_file_size_limit_exceeded']);
     }
     if (isset($input['connect_channels_message_ask_for_email'])) {
       $values['connect_channels_message_ask_for_email'] = sanitize_text_field($input['connect_channels_message_ask_for_email']);

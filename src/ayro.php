@@ -32,7 +32,7 @@ if (!defined('WPINC')) {
  */
 define('AYRO_PLUGIN_NAME', 'ayro');
 define('AYRO_PLUGIN_VERSION', '0.0.32');
-define('AYRO_LIBRARY_VERSION', '0.0.46');
+define('AYRO_LIBRARY_VERSION', '0.0.47');
 
 /**
  * The code that runs during plugin activation.

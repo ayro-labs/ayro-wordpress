@@ -30,7 +30,7 @@ class AyroPublic {
   public function enqueueScripts() {
     $libraryUrl = null;
     if (AYRO_ENV === 'development') {
-      $libraryUrl = 'https://localhost:9000/dist/ayro.js';
+      $libraryUrl = 'http://localhost:9000/dist/ayro.js';
     } else {
       $libraryUrl = 'https://cdn.ayro.io/sdks/ayro-' . $this->libraryVersion . '.min.js';
     }
@@ -46,6 +46,7 @@ class AyroPublic {
       'sounds' => $settings['sounds'],
       'chatboxHeaderTitle' => $settings['chatbox_header_title'],
       'chatboxInputPlaceholder' => $settings['chatbox_input_placeholder'],
+      'chatboxErrorsFileSizeLimitExceeded' => $settings['chatbox_errors_file_size_limit_exceeded'],
       'askForEmail' => $settings['connect_channels_message_ask_for_email'],
       'emailProvided' => $settings['connect_channels_message_email_provided'],
       'emailInputPlaceholder' => $settings['connect_channels_message_email_input_placeholder'],
