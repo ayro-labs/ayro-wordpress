@@ -16,13 +16,13 @@
     "publish-plugin": "node tasks/publish.js"
   },
   "devDependencies": {
-    "@ayro/commons": "0.0.29",
     "@octokit/rest": "15.8.1",
     "axios": "0.18.0",
     "bluebird": "3.5.1",
     "eslint": "4.19.1",
     "eslint-config-airbnb-base": "12.1.0",
     "eslint-plugin-import": "2.12.0",
-    "lodash": "4.17.10"
+    "lodash": "4.17.10",
+    "release-n-publish": "0.0.6"
   }
 }

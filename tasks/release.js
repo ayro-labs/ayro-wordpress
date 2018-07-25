@@ -2,7 +2,7 @@
 
 'use strict';
 
-const {commands, release} = require('@ayro/commons');
+const {commands, release} = require('release-n-publish');
 const fs = require('fs');
 const path = require('path');
 const util = require('util');
@@ -53,8 +53,8 @@ async function updateProjectVersion(version) {
 
 // Run this if call directly from command line
 if (require.main === module) {
-  release.withWorkingDir(WORKING_DIR);
-  release.withAfterVersionUpdateTask(updateProjectVersion);
-  release.withBuildTask(buildPlugin);
-  release.run(process.argv[2], process.argv[3]);
+  release.setWorkingDir(WORKING_DIR);
+  release.setAfterVersionUpdateTask(updateProjectVersion);
+  release.setBuildTask(buildPlugin);
+  release.run(process.argv[2]);
 }

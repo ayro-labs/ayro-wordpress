@@ -3,7 +3,7 @@
 'use strict';
 
 const project = require('../package');
-const {commands, publish} = require('@ayro/commons');
+const {commands, publish} = require('release-n-publish');
 const path = require('path');
 const GitHubApi = require('@octokit/rest');
 const Promise = require('bluebird');
@@ -120,9 +120,9 @@ async function publishToWordPressSvn() {
 
 // Run this if call directly from command line
 if (require.main === module) {
-  publish.withWorkingDir(WORKING_DIR);
-  publish.withBuildTask(buildPlugin);
-  publish.withBeforePublishTask(beforePublish);
-  publish.withPublishTask(publishToWordPressSvn);
+  publish.setWorkingDir(WORKING_DIR);
+  publish.setBuildTask(buildPlugin);
+  publish.setBeforePublishTask(beforePublish);
+  publish.setPublishTask(publishToWordPressSvn);
   publish.run();
 }

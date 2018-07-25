@@ -2,7 +2,7 @@
 
 'use strict';
 
-const {commands} = require('@ayro/commons');
+const {commands} = require('release-n-publish');
 const path = require('path');
 const _ = require('lodash');
 
